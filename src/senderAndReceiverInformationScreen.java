@@ -27,6 +27,9 @@ public class senderAndReceiverInformationScreen {
     @FindBy(css="input[name=\"fileUpload\"]") WebElement uploadFile;
     @FindBy(css="div.form-well") WebElement VerifyPaymentOption;
     @FindBy(css=".step-title.highlighted") WebElement colorElement;
+    @FindBy(css="div.receiver span.name") WebElement receiver;
+    @FindBy(css="div.sender span.name") WebElement sender;
+    @FindBy(css="p.card-text.cut-greeting") WebElement blessing;
 
 
     public senderAndReceiverInformationScreen(WebDriver driver) {

@@ -71,9 +71,14 @@ public class testsPage {
         myTests.log(LogStatus.INFO, "Start of the Test");
         try {
             rgScreen.registrationProcess();
-        } catch (Exception error) {
+            myTests.log(LogStatus.PASS, "Test failed",
+                    myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
+        }
+        catch (Exception TimeoutException) {
+            myTests.log(LogStatus.FAIL, "TimeoutException");
             myTests.log(LogStatus.FAIL, "Test failed",
-                    myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
+                    myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
+
         }
         String expected = generalPage.readFromFile("registrationDone");
         String actual = driver.getCurrentUrl();
@@ -83,9 +88,9 @@ public class testsPage {
             myTests.log(LogStatus.PASS, "The url are equal");
             myTests.log(LogStatus.PASS, "Registration done!");
         } catch (AssertionError e) {
-            myTests.log(LogStatus.INFO, "The urls are not equal" + e);
+            myTests.log(LogStatus.INFO, "The urls are not equal " + e);
             myTests.log(LogStatus.FAIL, "Test failed",
-                    myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
+                    myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
 
         }
         myTests.log(LogStatus.INFO, "End of the test" + name.getMethodName());
@@ -101,7 +106,7 @@ public class testsPage {
         } catch (Exception TimeoutException) {
             myTests.log(LogStatus.FAIL, "field my account didn't found");
             myTests.log(LogStatus.FAIL, "Test failed",
-                    myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
+                    myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
         }
 
         try {
@@ -193,12 +198,12 @@ public class testsPage {
            myTests.log(LogStatus.FAIL, "Element of highlighted 2 not found");
        }
          String actualColor="";
-     try {
+         try {
           actualColor = senderAndRecieverInfoScreen.colorElement.getCssValue("color");
           myTests.log(LogStatus.PASS, "elment is located");
+         System.out.println(actualColor);
          }
      catch (Exception NoSuchElementException) {
-          System.out.println("Color is:" + actualColor);
           myTests.log(LogStatus.FAIL, "can't locate element");
          }
 
@@ -209,6 +214,47 @@ public class testsPage {
         } catch (Exception|AssertionError error) {
             myTests.log(LogStatus.FAIL, "NoSuchElementException");
         }
+            String sender="if this text don't changed so it's an error";
+            String receiver="if this text don't changed so it's an error";
+            String blessing="if this text don't changed so it's an error";
+        try {
+            sender=senderAndRecieverInfoScreen.sender.getText();
+            receiver=senderAndRecieverInfoScreen.receiver.getText();
+            blessing=senderAndRecieverInfoScreen.blessing.getText();
+            myTests.log(LogStatus.PASS, "element find with text " +sender);
+            myTests.log(LogStatus.PASS, "element find with text " +receiver);
+            myTests.log(LogStatus.PASS, "element find with text " +blessing);
+        }
+        catch (Exception NoSuchElementException){
+            myTests.log(LogStatus.FAIL, "NoSuchElementException " +sender);
+            myTests.log(LogStatus.FAIL, "NoSuchElementException " +receiver);
+            myTests.log(LogStatus.FAIL, "NoSuchElementException " +blessing);
+        }
+        try {
+            String expectedSender=generalPage.readFromFile("fromWhoGift");
+            Assert.assertEquals(expectedSender,sender);
+            myTests.log(LogStatus.PASS, "assertion sender passed");
+        }
+        catch (AssertionError error){
+            myTests.log(LogStatus.FAIL, "not same sender info");
+        }
+        try {
+            String expectedReceiver=generalPage.readFromFile("receiver");
+            Assert.assertEquals(expectedReceiver,receiver);
+            myTests.log(LogStatus.PASS, "assertion receiver passed");
+        }
+        catch (AssertionError error){
+            myTests.log(LogStatus.FAIL, "not same receiver info");
+        }
+        try {
+            String expectedBlessing=generalPage.readFromFile("blessing");
+            Assert.assertEquals(expectedBlessing,blessing);
+            myTests.log(LogStatus.PASS, "assertion blessing passed");
+        }
+        catch (AssertionError error){
+            myTests.log(LogStatus.FAIL, "not same blessing info");
+        }
+
 
         try {
             Assert.assertTrue(driver.getCurrentUrl().contains("payment"));
@@ -232,7 +278,7 @@ public class testsPage {
         driver.navigate().to("https://buyme.co.il");
     try {
         wait.until(ExpectedConditions.visibilityOf(hmscreen.myAccount));
-        myTests.log(LogStatus.PASS, "element is visible " + name.getMethodName());
+        myTests.log(LogStatus.PASS, "element is visible ");
     }
     catch (TimeoutException error){
         myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis()));
@@ -251,13 +297,13 @@ public class testsPage {
                 actualText=hmscreen.getTheRedText.getText();
                 myTests.log(LogStatus.PASS, "element of red text found ");
             }
-            catch (Exception NoSuchElementExceptio ){
+            catch (Exception NoSuchElementException ){
                 myTests.log(LogStatus.FAIL, "element of red text didn't found ");
             }
             System.out.println(actualText);
         try{
             Assert.assertEquals(expectedText,actualText);
-            myTests.log(LogStatus.PASS, "the assertion passed " + name.getMethodName());
+            myTests.log(LogStatus.PASS, "the assertion passed ");
         }
         catch (AssertionError error){
             myTests.log(LogStatus.FAIL, "Test failed",
@@ -372,42 +418,3 @@ public class testsPage {
     }
 
 }
- /*@Test public void
-    test_01_extrasAssertRedText() throws Exception {
-        myTests = extent.startTest(name.getMethodName());
-        myTests.log(LogStatus.INFO, "Start of the Test");
-        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
-        driver.navigate().to("https://buyme.co.il");
-        hmscreen.loginRedText();
-        String expectedText=generalPage.readFromFile("redText");
-        String actualText=hmscreen.getTheRedText.getText();
-        try{
-            Assert.assertEquals(expectedText,actualText);
-            myTests.log(LogStatus.PASS, "the assertion passed" + name.getMethodName());
-        }
-        catch (AssertionError error){
-            myTests.log(LogStatus.FAIL, "Test failed",
-                    myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
-        }
-        hmscreen.exit.click();
-        myTests.log(LogStatus.INFO, "End of the test" + name.getMethodName());
-    }//catch assert red text Extra test number 2...
-
-    @Test public void
-    test_02_scrollToButtonExtras(){
-        myTests = extent.startTest(name.getMethodName());
-        myTests.log(LogStatus.INFO, "Start of the Test");
-        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
-        driver.navigate().to("https://buyme.co.il/search");
-        try {
-            giftScreen.ScrollTobButtonOfthePageExtras();
-            myTests.log(LogStatus.PASS, "Test passed",
-                    myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
-        }
-        catch (Exception error){
-            myTests.log(LogStatus.FAIL, "Test failed",
-                    myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
-        }
-        myTests.log(LogStatus.INFO, "End of the test" + name.getMethodName());
-    }// scroll To Button Extras test 3...
-  */
