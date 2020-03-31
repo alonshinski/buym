@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<firstName>Useruser</firstName>
+<email>idinx223zzcxx@walla.co.il</email>
+<pass>Mypassis11s12</pass>
+<browser>Chrome</browser>
+<registrationDone>https://buyme.co.il/</registrationDone>
+<urlChanged>https://buyme.co.il/search?budget=2&amp;category=10&amp;region=13</urlChanged>
+<receiver>maxim</receiver>
+<fromWhoGift>Griffindor</fromWhoGift>
+<blessing>קח מתנה יגבר!!!</blessing>
+<placeHolder>emailstam@walla.co.il</placeHolder>
+<buymePayment>https://buyme.co.il/payment/</buymePayment>
+<yellowText>rgba(250, 180, 66, 1)</yellowText>
+<redText>כל המתנות מחכות לך! אבל קודם צריך מייל וסיסמה</redText>
+
+</config>
