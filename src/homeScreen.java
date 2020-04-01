@@ -13,7 +13,7 @@ public class homeScreen {
 
     @FindBy(css = "ul.nav-bar.buttons li:nth-of-type(3)")
     WebElement loginAndRegister;
-    @FindBy(xpath = "//*[@id=\"ember624\"]/div/div[1]/div/div/div[3]/p/span")
+    @FindBy(css= "span.text-btn")
     WebElement Register;
     @FindBy(css = "form.form.ember-view div.ember-chosenselect:nth-of-type(1)")
     WebElement pickAprice;

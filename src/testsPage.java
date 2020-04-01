@@ -177,7 +177,7 @@ public class testsPage {
         myTests.log(LogStatus.INFO, "Start of the Test");
         try {
             Assert.assertTrue(driver.getCurrentUrl().contains("package"));
-            myTests.log(LogStatus.PASS, "Stage 1 passed");
+            myTests.log(LogStatus.PASS, "Stage 2 is displayed the assert true passed");
             myTests.log(LogStatus.PASS, "test passed",
                     myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
         }
@@ -200,23 +200,23 @@ public class testsPage {
          String actualColor="";
          try {
           actualColor = senderAndRecieverInfoScreen.colorElement.getCssValue("color");
-          myTests.log(LogStatus.PASS, "elment is located");
+          myTests.log(LogStatus.PASS, "Saved the color of element");
          System.out.println(actualColor);
          }
      catch (Exception NoSuchElementException) {
-          myTests.log(LogStatus.FAIL, "can't locate element");
+          myTests.log(LogStatus.FAIL, "can't get the color of element");
          }
 
         try {
             Assert.assertEquals(colorExpected,actualColor);
-            myTests.log(LogStatus.PASS, "The color code is good ");
+            myTests.log(LogStatus.PASS, "The color code is good and assertEquals passed");
             senderAndRecieverInfoScreen.mytest04Actions();
         } catch (Exception|AssertionError error) {
             myTests.log(LogStatus.FAIL, "NoSuchElementException");
         }
-            String sender="if this text don't changed so it's an error";
-            String receiver="if this text don't changed so it's an error";
-            String blessing="if this text don't changed so it's an error";
+            String sender="if this text don't changed so it's an error with sender field";
+            String receiver="if this text don't changed so it's error issue with receiver field";
+            String blessing="if this text don't changed so it's error issue with blessing field";
         try {
             sender=senderAndRecieverInfoScreen.sender.getText();
             receiver=senderAndRecieverInfoScreen.receiver.getText();
