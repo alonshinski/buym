@@ -13,7 +13,7 @@ public class chooseGiftScreen {
     @FindBy(css="img[src=\"https://buyme.co.il/files/packages/private/packageImage339617.jpg?1573934439\"]")
     WebElement chooseABuisness;
     @FindBy(css="a[href=\"https://buyme.co.il/categories/הכי נמכרים\"]") WebElement scrollToButton;
-
+    @FindBy(css="h1.page-title") WebElement elementOfSearch;
     public chooseGiftScreen(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);

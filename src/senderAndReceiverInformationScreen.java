@@ -52,7 +52,7 @@ public class senderAndReceiverInformationScreen {
         textBlessing.sendKeys(generalPage.readFromFile("blessing"));
         WebElement uploadAFile = uploadFile;
        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", uploadAFile);
-        Thread.sleep(5000);
+       Thread.sleep(5000);
         generalPage.uploadAFile(uploadFile,mypath);
         boolean selectedValue=afterPaymentSendGift.isSelected();
         if(!selectedValue)
@@ -64,9 +64,5 @@ public class senderAndReceiverInformationScreen {
         SendGift.click();
         Thread.sleep(5000);
     }
-   /* public void aHoverForSignOut(){
-        Actions builder = new Actions(driver);
-        WebElement mouseOverHome = driver.findElement(By.id("close"));
-        builder.moveToElement(mouseOverHome).perform();
-    }*/
+
 }

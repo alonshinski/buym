@@ -71,7 +71,7 @@ public class testsPage {
         myTests.log(LogStatus.INFO, "Start of the Test");
         try {
             rgScreen.registrationProcess();
-            myTests.log(LogStatus.PASS, "Test failed",
+            myTests.log(LogStatus.INFO, "Test failed",
                     myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
         }
         catch (Exception TimeoutException) {
@@ -214,21 +214,21 @@ public class testsPage {
         } catch (Exception|AssertionError error) {
             myTests.log(LogStatus.FAIL, "NoSuchElementException");
         }
-            String sender="if this text don't changed so it's an error with sender field";
-            String receiver="if this text don't changed so it's error issue with receiver field";
-            String blessing="if this text don't changed so it's error issue with blessing field";
+            String sender="";
+            String receiver="";
+            String blessing="";
         try {
             sender=senderAndRecieverInfoScreen.sender.getText();
             receiver=senderAndRecieverInfoScreen.receiver.getText();
             blessing=senderAndRecieverInfoScreen.blessing.getText();
-            myTests.log(LogStatus.PASS, "element find with text " +sender);
-            myTests.log(LogStatus.PASS, "element find with text " +receiver);
-            myTests.log(LogStatus.PASS, "element find with text " +blessing);
+            myTests.log(LogStatus.PASS, "element found with text " +sender);
+            myTests.log(LogStatus.PASS, "element found with text " +receiver);
+            myTests.log(LogStatus.PASS, "element found with text " +blessing);
         }
         catch (Exception NoSuchElementException){
-            myTests.log(LogStatus.FAIL, "NoSuchElementException " +sender);
-            myTests.log(LogStatus.FAIL, "NoSuchElementException " +receiver);
-            myTests.log(LogStatus.FAIL, "NoSuchElementException " +blessing);
+            myTests.log(LogStatus.FAIL, "NoSuchElementException ");
+            myTests.log(LogStatus.FAIL, "NoSuchElementException ");
+            myTests.log(LogStatus.FAIL, "NoSuchElementException ");
         }
         try {
             String expectedSender=generalPage.readFromFile("fromWhoGift");
@@ -274,7 +274,6 @@ public class testsPage {
         myTests = extent.startTest(name.getMethodName());
         myTests.log(LogStatus.INFO, "Start of the Test");
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.navigate().to("https://buyme.co.il");
     try {
         wait.until(ExpectedConditions.visibilityOf(hmscreen.myAccount));
@@ -328,11 +327,19 @@ public class testsPage {
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.navigate().to("https://buyme.co.il/search");
+        try{
+            Assert.assertTrue(giftScreen.elementOfSearch.isDisplayed());
+            myTests.log(LogStatus.PASS, "The assertTrue passed");
+        }
+        catch (AssertionError error){
+            myTests.log(LogStatus.PASS, "The assertTrue failed you didn't get to right page");
+        }
         try {
             ((JavascriptExecutor) driver)
                     .executeScript("window.scrollTo(0, document.body.scrollHeight)");
             wait.until(ExpectedConditions.visibilityOf(giftScreen.scrollToButton));
             myTests.log(LogStatus.PASS, "Scorlled to the bottom");
+            Thread.sleep(1000);
             myTests.log(LogStatus.PASS, "Test passed",
                     myTests.addScreenCapture(testsPage.takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
         }

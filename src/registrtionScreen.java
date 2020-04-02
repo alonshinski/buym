@@ -55,19 +55,19 @@ public class registrtionScreen {
         hmscreen=new homeScreen(driver);
         hmscreen.loginAndRegister.click();
         hmscreen.Register.click();
-        Thread.sleep(1000);
+     //   Thread.sleep(1000);
         rgScreen.userNameField.click();
-        Thread.sleep(1000);
+      //  Thread.sleep(1000);
         rgScreen.userNameField.sendKeys(generalPage.readFromFile("firstName"));
-        Thread.sleep(1000);
+      //  Thread.sleep(1000);
         rgScreen.email.sendKeys(generalPage.readFromFile("email"));
-        Thread.sleep(1000);
+      //  Thread.sleep(1000);
         rgScreen.pass.sendKeys(generalPage.readFromFile("pass"));
-        Thread.sleep(1000);
+     //   Thread.sleep(1000);
         rgScreen.passValidation.sendKeys(generalPage.readFromFile("pass"));
-        Thread.sleep(1000);
+     //   Thread.sleep(1000);
         rgScreen.clickOnRegistertionButton.click();
-        Thread.sleep(1000);
+       // Thread.sleep(1000);
 
     }
 
