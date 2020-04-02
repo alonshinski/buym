@@ -236,7 +236,7 @@ public class testsPage {
             myTests.log(LogStatus.PASS, "assertion sender passed");
         }
         catch (AssertionError error){
-            myTests.log(LogStatus.FAIL, "not same sender info");
+            myTests.log(LogStatus.FAIL, "NoSuchElementException ");
         }
         try {
             String expectedReceiver=generalPage.readFromFile("receiver");
@@ -244,7 +244,7 @@ public class testsPage {
             myTests.log(LogStatus.PASS, "assertion receiver passed");
         }
         catch (AssertionError error){
-            myTests.log(LogStatus.FAIL, "not same receiver info");
+            myTests.log(LogStatus.FAIL, "NoSuchElementException ");
         }
         try {
             String expectedBlessing=generalPage.readFromFile("blessing");
@@ -252,7 +252,7 @@ public class testsPage {
             myTests.log(LogStatus.PASS, "assertion blessing passed");
         }
         catch (AssertionError error){
-            myTests.log(LogStatus.FAIL, "not same blessing info");
+            myTests.log(LogStatus.FAIL, "NoSuchElementException ");
         }
 
 
