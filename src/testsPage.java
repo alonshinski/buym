@@ -130,7 +130,7 @@ public class testsPage {
     public void test_03_chooseGiftScreen() throws Exception {
         myTests = extent.startTest(name.getMethodName());
         myTests.log(LogStatus.INFO, "Start of the Test");
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         String expectedUrl = generalPage.readFromFile("urlChanged");
         String urlAfterReplaceAll = expectedUrl.replaceAll("amp;", "");
         System.out.println(urlAfterReplaceAll);
@@ -143,21 +143,22 @@ public class testsPage {
             myTests.log(LogStatus.FAIL, "Test failed",
                     myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
         }
-
-        try {
+      /*  try {
             wait.until(ExpectedConditions.visibilityOf(giftScreen.pickABuisness));
             myTests.log(LogStatus.PASS, "element of business photo visible");
-        } catch (Exception TimeoutException) {
+        }
+        catch (Exception TimeoutException) {
             myTests.log(LogStatus.FAIL, "can't click on element of business photo");
             myTests.log(LogStatus.FAIL, "Test failed",
                     myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
-        }
-
+        }*/
         try {
             giftScreen.scrollInToElement();
             myTests.log(LogStatus.PASS, "Successfully scorlled in to Element");
         } catch (Exception error) {
             myTests.log(LogStatus.FAIL, "NoSuchElementException");
+            myTests.log(LogStatus.FAIL, "Test failed",
+                    myTests.addScreenCapture(takeScreenShot(ImagesPath + "\\" + System.currentTimeMillis())));
         }
         try {
             wait.until(ExpectedConditions.visibilityOf(giftScreen.chooseABuisness));

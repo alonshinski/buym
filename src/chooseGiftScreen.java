@@ -1,6 +1,8 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,10 +23,11 @@ public class chooseGiftScreen {
 
     public void scrollInToElement() throws InterruptedException {
         WebElement ele = pickABuisness;
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);
+      /* ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);*/
+       JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,250)");
         pickABuisness.click();
         Thread.sleep(1000);
-
     }
 
     public void ScrollTobButtonOfthePageExtras(){

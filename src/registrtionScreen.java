@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,6 +55,7 @@ public class registrtionScreen {
         driver.manage().window().maximize();
         rgScreen = new  registrtionScreen(driver);
         hmscreen=new homeScreen(driver);
+        WebElement ele = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(hmscreen.loginAndRegister));
         hmscreen.loginAndRegister.click();
         hmscreen.Register.click();
      //   Thread.sleep(1000);
